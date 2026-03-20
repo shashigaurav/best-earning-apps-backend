@@ -15,6 +15,12 @@ public class AdminService {
 
     public boolean login(String username, String password) {
 
+        // 🔥 1. DEFAULT ADMIN (fallback for testing)
+        if(username.equals("admin") && password.equals("Earn@121")){
+            return true;
+        }
+
+        // 🔥 2. DATABASE CHECK
         Optional<Admin> admin = adminRepository.findByUsername(username);
 
         if(admin.isPresent()){
