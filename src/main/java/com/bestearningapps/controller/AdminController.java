@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin(origins = {
@@ -29,12 +28,13 @@ public class AdminController {
 
         Map<String, Object> res = new HashMap<>();
 
-        if (valid) {
-            res.put("success", true);
-        } else {
-            res.put("success", false);
-        }
+        res.put("success", valid);
 
         return res;
+    }
+
+    // 🔥 Preflight fix
+    @RequestMapping(value = "/login", method = RequestMethod.OPTIONS)
+    public void optionsLogin() {
     }
 }

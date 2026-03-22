@@ -7,6 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/admin/upload")
+@CrossOrigin(origins = {
+        "http://localhost:4200",
+        "https://best-earning-apps.netlify.app"
+})
 public class UploadController {
 
     @Autowired
