@@ -16,6 +16,13 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    // TEST API (browser se check karne ke liye)
+    @GetMapping("/test")
+    public String test() {
+        return "Backend API Working";
+    }
+
+    // LOGIN API
     @PostMapping("/login")
     public Map<String, Object> login(@RequestBody LoginRequest request) {
 
@@ -25,8 +32,17 @@ public class AdminController {
         );
 
         Map<String, Object> res = new HashMap<>();
-        res.put("success", valid);
+
+        if(valid){
+            res.put("success", true);
+            res.put("message", "Login Successful");
+        } else {
+            res.put("success", false);
+            res.put("message", "Invalid username or password");
+        }
 
         return res;
     }
+
+
 }
