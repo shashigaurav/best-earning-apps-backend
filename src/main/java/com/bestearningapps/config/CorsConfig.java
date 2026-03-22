@@ -14,8 +14,11 @@ public class CorsConfig implements WebMvcConfigurer {
                         "http://localhost:4200",
                         "https://best-earning-apps.netlify.app"
                 )
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedMethods("*")
                 .allowedHeaders("*")
-                .allowCredentials(true);
+                .allowCredentials(true)
+                .maxAge(3600);
+
     }
+
 }
