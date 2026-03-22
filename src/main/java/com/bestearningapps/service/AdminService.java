@@ -15,16 +15,20 @@ public class AdminService {
 
     public boolean login(String username, String password) {
 
-        // 🔥 1. DEFAULT ADMIN (fallback for testing)
-        if(username.equals("admin") && password.equals("Earn@121")){
+        // fallback admin (test login)
+        if ("admin".equals(username) && "Earn@121".equals(password)) {
             return true;
         }
 
-        // 🔥 2. DATABASE CHECK
-        Optional<Admin> admin = adminRepository.findByUsername(username);
+        try {
+            Optional<Admin> admin = adminRepository.findByUsername(username);
 
-        if(admin.isPresent()){
-            return admin.get().getPassword().equals(password);
+            if (admin.isPresent()) {
+                return password.equals(admin.get().getPassword());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();   // error Render logs me dikhega
         }
 
         return false;
