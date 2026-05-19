@@ -13,8 +13,17 @@ public class FileStorageService {
 
     public String saveFile(MultipartFile file) throws IOException {
 
+        // Create uploads folder if not exists
+        File folder = new File(uploadDir);
+
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+
+        // Generate file name
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 
+        // Save file
         File destination = new File(uploadDir + fileName);
 
         file.transferTo(destination);
