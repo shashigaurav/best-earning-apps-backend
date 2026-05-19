@@ -24,7 +24,7 @@ public class FileStorageService {
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 
         // Save file
-        File destination = new File(uploadDir + fileName);
+        File destination = new File(folder, fileName);
 
         file.transferTo(destination);
 
