@@ -9,7 +9,7 @@ import java.io.IOException;
 @Service
 public class FileStorageService {
 
-    // Render/Linux server friendly path
+    // Render/Linux compatible upload path
     private final String uploadDir =
             System.getProperty("java.io.tmpdir") + "/uploads/";
 
@@ -22,15 +22,18 @@ public class FileStorageService {
             folder.mkdirs();
         }
 
-        // Generate unique file name
+        // Generate unique filename
         String fileName =
                 System.currentTimeMillis() + "_" + file.getOriginalFilename();
 
-        // Save file
-        File destination = new File(folder, fileName);
+        // Destination file
+        File destination =
+                new File(folder, fileName);
 
+        // Save file
         file.transferTo(destination);
 
-        return fileName;
+        // Return public image path
+        return "/uploads/" + fileName;
     }
 }
