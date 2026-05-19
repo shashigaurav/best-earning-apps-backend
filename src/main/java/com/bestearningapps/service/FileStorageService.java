@@ -9,7 +9,9 @@ import java.io.IOException;
 @Service
 public class FileStorageService {
 
-    private final String uploadDir = "uploads/";
+    // Render/Linux server friendly path
+    private final String uploadDir =
+            System.getProperty("java.io.tmpdir") + "/uploads/";
 
     public String saveFile(MultipartFile file) throws IOException {
 
@@ -20,8 +22,9 @@ public class FileStorageService {
             folder.mkdirs();
         }
 
-        // Generate file name
-        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        // Generate unique file name
+        String fileName =
+                System.currentTimeMillis() + "_" + file.getOriginalFilename();
 
         // Save file
         File destination = new File(folder, fileName);
