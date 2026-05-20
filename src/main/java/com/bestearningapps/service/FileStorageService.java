@@ -13,31 +13,26 @@ public class FileStorageService {
     private final String uploadDir =
             System.getProperty("java.io.tmpdir") + "/uploads/";
 
-    // Your Render backend URL
-    private final String baseUrl =
-            "https://best-earning-apps-backend.onrender.com";
-
     public String saveFile(MultipartFile file) throws IOException {
 
-        // Create uploads folder if not exists
-        File folder = new File(uploadDir);
+        // create uploads folder if not exists
+        File dir = new File(uploadDir);
 
-        if (!folder.exists()) {
-            folder.mkdirs();
+        if (!dir.exists()) {
+            dir.mkdirs();
         }
 
-        // Generate unique filename
+        // unique file name
         String fileName =
                 System.currentTimeMillis() + "_" + file.getOriginalFilename();
 
-        // Destination file
-        File destination =
-                new File(folder, fileName);
+        // final destination
+        File destination = new File(uploadDir + fileName);
 
-        // Save file
+        // save file
         file.transferTo(destination);
 
-        // Return full public image URL
-        return baseUrl + "/uploads/" + fileName;
+        // return path for DB
+        return "uploads/" + fileName;
     }
 }
